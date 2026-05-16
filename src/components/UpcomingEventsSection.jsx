@@ -4,6 +4,7 @@ import { SectionHeading } from "./SectionHeading";
 
 export function UpcomingEventsSection({ weeklySchedule, promotions }) {
   const todayName = new Intl.DateTimeFormat("en-US", { weekday: "long" }).format(new Date());
+  const activeSchedule = weeklySchedule.filter((day) => day.active === true);
 
   return (
     <section id="events" className="px-4 py-12 sm:px-6 lg:px-8 lg:py-16">
@@ -31,65 +32,58 @@ export function UpcomingEventsSection({ weeklySchedule, promotions }) {
           </article>
 
           <div className="grid gap-5">
-            {weeklySchedule.map((day) => (
-              <article
-                key={day.id}
-                className={`rounded-[1.75rem] p-5 shadow-[0_18px_55px_rgba(122,74,43,0.13)] ${
-                  day.day === todayName ? "bg-[#fff0d6]" : "bg-[#fffaf2]"
-                }`}
-              >
-                <div className="flex flex-wrap items-center justify-between gap-3">
-                  <div className="inline-flex rounded-full bg-[#ffe6b5] px-4 py-2 text-sm font-black uppercase tracking-[0.18em] text-carnival-red">
-                    {day.day}
+            {activeSchedule.length ? (
+              activeSchedule.map((day) => (
+                <article
+                  key={day.id}
+                  className={`rounded-[1.75rem] p-5 shadow-[0_18px_55px_rgba(122,74,43,0.13)] ${
+                    day.day === todayName ? "bg-[#fff0d6]" : "bg-[#fffaf2]"
+                  }`}
+                >
+                  <div className="flex flex-wrap items-center justify-between gap-3">
+                    <div className="inline-flex rounded-full bg-[#ffe6b5] px-4 py-2 text-sm font-black uppercase tracking-[0.18em] text-carnival-red">
+                      {day.day}
+                    </div>
+                    <div className="flex items-center gap-2 text-sm font-bold uppercase tracking-[0.18em] text-donut/60">
+                      <TentTree className="h-4 w-4 text-carnival-red" />
+                      {day.day === todayName ? "Today" : "Scheduled"}
+                    </div>
                   </div>
-                  <div className="flex items-center gap-2 text-sm font-bold uppercase tracking-[0.18em] text-donut/60">
-                    {day.active ? (
-                      <>
-                        <TentTree className="h-4 w-4 text-carnival-red" />
-                        {day.day === todayName ? "Today" : "Scheduled"}
-                      </>
-                    ) : (
-                      <>
-                        <Store className="h-4 w-4 text-carnival-red" />
-                        Closed
-                      </>
-                    )}
-                  </div>
-                </div>
 
-                {day.active ? (
-                  <>
-                    <h3 className="mt-5 font-display text-3xl leading-none text-donut-deep">{day.title}</h3>
-                    <div className="mt-5 grid gap-4 sm:grid-cols-2">
-                      <div className="space-y-4">
-                        <div className="flex items-start gap-3">
-                          <MapPinned className="mt-1 h-5 w-5 text-carnival-red" />
-                          <div>
-                            <p className="text-base font-semibold text-donut/82">{day.location}</p>
-                            <p className="mt-1 text-sm text-donut/65">{day.address}</p>
-                          </div>
-                        </div>
-                        <div className="flex items-start gap-3">
-                          <CalendarRange className="mt-1 h-5 w-5 text-carnival-red" />
-                          <p className="text-base font-semibold text-donut/82">{day.hours}</p>
+                  <h3 className="mt-5 font-display text-3xl leading-none text-donut-deep">{day.title}</h3>
+                  <div className="mt-5 grid gap-4 sm:grid-cols-2">
+                    <div className="space-y-4">
+                      <div className="flex items-start gap-3">
+                        <MapPinned className="mt-1 h-5 w-5 text-carnival-red" />
+                        <div>
+                          <p className="text-base font-semibold text-donut/82">{day.location}</p>
+                          <p className="mt-1 text-sm text-donut/65">{day.address}</p>
                         </div>
                       </div>
-                      <div className="rounded-[1.35rem] bg-white/80 p-4">
-                        <p className="text-xs font-black uppercase tracking-[0.18em] text-carnival-red">Notes</p>
-                        <p className="mt-2 text-base font-semibold leading-7 text-donut/78">{day.notes}</p>
+                      <div className="flex items-start gap-3">
+                        <CalendarRange className="mt-1 h-5 w-5 text-carnival-red" />
+                        <p className="text-base font-semibold text-donut/82">{day.hours}</p>
                       </div>
                     </div>
-                  </>
-                ) : (
-                  <>
-                    <h3 className="mt-5 font-display text-3xl leading-none text-donut-deep">Closed</h3>
-                    <p className="mt-4 text-base font-semibold text-donut/72">
-                      {day.notes || "No scheduled stop"}
-                    </p>
-                  </>
-                )}
+                    <div className="rounded-[1.35rem] bg-white/80 p-4">
+                      <p className="text-xs font-black uppercase tracking-[0.18em] text-carnival-red">Notes</p>
+                      <p className="mt-2 text-base font-semibold leading-7 text-donut/78">{day.notes}</p>
+                    </div>
+                  </div>
+                </article>
+              ))
+            ) : (
+              <article className="rounded-[1.75rem] bg-[#fffaf2] p-5 shadow-[0_18px_55px_rgba(122,74,43,0.13)]">
+                <div className="flex items-center gap-2 text-sm font-bold uppercase tracking-[0.18em] text-donut/60">
+                  <Store className="h-4 w-4 text-carnival-red" />
+                  Closed This Week
+                </div>
+                <h3 className="mt-5 font-display text-3xl leading-none text-donut-deep">No scheduled stops this week.</h3>
+                <p className="mt-4 text-base font-semibold text-donut/72">
+                  Check back soon for the next round of pop-ups, fairs, and community stops.
+                </p>
               </article>
-            ))}
+            )}
           </div>
         </div>
       </div>

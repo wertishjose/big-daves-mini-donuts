@@ -122,13 +122,14 @@ function normalizeWeeklySchedule(schedule, events) {
       const existingEntry =
         schedule.find((entry) => entry.day === day) ??
         schedule.find((entry) => entry.id === day.toLowerCase());
+      const hasExistingEntry = Boolean(existingEntry);
 
       return {
         ...defaultEntry,
         ...(existingEntry ?? {}),
         id: defaultEntry.id,
         day,
-        active: Boolean(existingEntry?.active ?? defaultEntry.active),
+        active: hasExistingEntry ? existingEntry?.active === true : false,
         title: existingEntry?.title ?? defaultEntry.title,
         location: existingEntry?.location ?? defaultEntry.location,
         address: existingEntry?.address ?? defaultEntry.address,
