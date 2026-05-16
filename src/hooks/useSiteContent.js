@@ -75,7 +75,10 @@ function normalizeFeaturedItems(items) {
     return {
       ...defaultItem,
       ...item,
-      image: normalizeImagePath(item.image, defaultItem.image),
+      image:
+        item.id === "cotton-candy"
+          ? "/images/cotton-candy.jpg"
+          : normalizeImagePath(item.image, defaultItem.image),
       accent: defaultItem.accent,
     };
   });
