@@ -44,7 +44,7 @@ export const defaultSiteContent = {
       price: "Cotton Candy $5",
       bonus: "Carnival favorite",
       description: "A bright, fluffy fairground extra that rounds out the trailer's sweetest stops.",
-      image: "/images/661908500_122259026036059769_238648391896525221_n.jpg",
+      image: "/images/cotton-candy.jpg",
       accent: "from-[#ffe7f2] via-[#ffd1e5] to-[#ff9ccc]",
     },
   ],

@@ -35,6 +35,31 @@ function normalizeTodayLocation(location) {
   };
 }
 
+function normalizeFeaturedItems(items) {
+  const defaultItemsById = new Map(
+    defaultSiteContent.featuredItems.map((item) => [item.id, item]),
+  );
+
+  if (!items?.length) {
+    return defaultSiteContent.featuredItems;
+  }
+
+  return items.map((item) => {
+    const defaultItem = defaultItemsById.get(item.id);
+
+    if (!defaultItem) {
+      return item;
+    }
+
+    return {
+      ...defaultItem,
+      ...item,
+      image: defaultItem.image,
+      accent: defaultItem.accent,
+    };
+  });
+}
+
 function mergeSiteContent(payload) {
   return {
     ...defaultSiteContent,
@@ -44,7 +69,7 @@ function mergeSiteContent(payload) {
       ...defaultSiteContent.hero,
       ...(payload?.hero ?? {}),
     },
-    featuredItems: payload?.featuredItems ?? defaultSiteContent.featuredItems,
+    featuredItems: normalizeFeaturedItems(payload?.featuredItems),
     testimonials: payload?.testimonials ?? defaultSiteContent.testimonials,
     events: payload?.events ?? defaultSiteContent.events,
   };
