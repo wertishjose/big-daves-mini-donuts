@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
-import { defaultSiteContent } from "../data/mockData";
+import { defaultSiteContent, weeklyScheduleOrder } from "../data/mockData";
 import { hasSupabaseEnv, supabase } from "../lib/supabase";
 
 function buildLocationLinks(address, fallbackLocation) {
@@ -111,7 +111,82 @@ function normalizeEvents(events) {
   });
 }
 
+function normalizeWeeklySchedule(schedule, events) {
+  const defaultScheduleByDay = new Map(
+    defaultSiteContent.weeklySchedule.map((entry) => [entry.day, entry]),
+  );
+
+  if (schedule?.length) {
+    return weeklyScheduleOrder.map((day) => {
+      const defaultEntry = defaultScheduleByDay.get(day);
+      const existingEntry =
+        schedule.find((entry) => entry.day === day) ??
+        schedule.find((entry) => entry.id === day.toLowerCase());
+
+      return {
+        ...defaultEntry,
+        ...(existingEntry ?? {}),
+        id: defaultEntry.id,
+        day,
+        active: Boolean(existingEntry?.active ?? defaultEntry.active),
+        title: existingEntry?.title ?? defaultEntry.title,
+        location: existingEntry?.location ?? defaultEntry.location,
+        address: existingEntry?.address ?? defaultEntry.address,
+        hours: existingEntry?.hours ?? defaultEntry.hours,
+        notes: existingEntry?.notes ?? defaultEntry.notes,
+      };
+    });
+  }
+
+  const normalizedEvents = normalizeEvents(events);
+  const derivedMonday = normalizedEvents.find((event) => event.id === "1") ?? normalizedEvents[0];
+  const derivedFriday = normalizedEvents.find((event) => event.id === "2");
+  const derivedSaturday = normalizedEvents.find((event) => event.id === "3");
+
+  return defaultSiteContent.weeklySchedule.map((entry) => {
+    if (entry.day === "Monday" && derivedMonday) {
+      return {
+        ...entry,
+        active: true,
+        title: derivedMonday.title,
+        location: derivedMonday.location,
+        address: derivedMonday.location,
+        hours: derivedMonday.time,
+        notes: defaultSiteContent.todayLocation.featuredSpecial,
+      };
+    }
+
+    if (entry.day === "Friday" && derivedFriday) {
+      return {
+        ...entry,
+        active: true,
+        title: derivedFriday.title,
+        location: derivedFriday.location,
+        address: derivedFriday.location,
+        hours: derivedFriday.time,
+        notes: derivedFriday.date,
+      };
+    }
+
+    if (entry.day === "Saturday" && derivedSaturday) {
+      return {
+        ...entry,
+        active: true,
+        title: derivedSaturday.title,
+        location: derivedSaturday.location,
+        address: derivedSaturday.location,
+        hours: derivedSaturday.time,
+        notes: derivedSaturday.date,
+      };
+    }
+
+    return entry;
+  });
+}
+
 function mergeSiteContent(payload) {
+  const normalizedEvents = normalizeEvents(payload?.events);
+
   return {
     ...defaultSiteContent,
     ...payload,
@@ -125,7 +200,8 @@ function mergeSiteContent(payload) {
     },
     featuredItems: normalizeFeaturedItems(payload?.featuredItems),
     testimonials: payload?.testimonials ?? defaultSiteContent.testimonials,
-    events: normalizeEvents(payload?.events),
+    events: normalizedEvents,
+    weeklySchedule: normalizeWeeklySchedule(payload?.weeklySchedule, normalizedEvents),
     promotions: {
       ...defaultSiteContent.promotions,
       ...(payload?.promotions ?? {}),

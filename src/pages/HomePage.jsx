@@ -17,7 +17,7 @@ export function HomePage() {
       <LiveLocationSection location={siteContent.todayLocation} />
       <FeaturedFavoritesSection items={siteContent.featuredItems} />
       <TestimonialsSection testimonials={siteContent.testimonials} />
-      <UpcomingEventsSection events={siteContent.events} promotions={siteContent.promotions} />
+      <UpcomingEventsSection weeklySchedule={siteContent.weeklySchedule} promotions={siteContent.promotions} />
       <DonutAlertsSection />
       <Footer />
       <StickyMobileBar

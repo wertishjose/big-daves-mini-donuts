@@ -20,29 +20,24 @@ export function AdminDashboard({
     }));
   };
 
-  const primaryPopupEvent =
-    siteContent.events?.find((event) => event.id === "1") ?? siteContent.events?.[0] ?? null;
-
-  const updatePrimaryPopupLocation = (value) => {
+  const updateWeeklyScheduleAt = (dayId, field, value) => {
     setSiteContent((current) => {
-      const existingEvents = current.events?.length ? current.events : [];
+      const existingSchedule = current.weeklySchedule?.length ? current.weeklySchedule : [];
 
-      if (!existingEvents.length) {
+      if (!existingSchedule.length) {
         return current;
       }
 
       return {
         ...current,
-        events: existingEvents.map((event, index) => {
-          const isPrimaryPopup = event.id === "1" || (!existingEvents.some((item) => item.id === "1") && index === 0);
-
-          return isPrimaryPopup
+        weeklySchedule: existingSchedule.map((entry) =>
+          entry.id === dayId
             ? {
-                ...event,
-                location: value,
+                ...entry,
+                [field]: value,
               }
-            : event;
-        }),
+            : entry,
+        ),
       };
     });
   };
@@ -161,16 +156,6 @@ export function AdminDashboard({
               />
             </label>
 
-            <label className="block">
-              <span className="text-base font-black text-donut-deep">Pop-Up Location</span>
-              <input
-                value={primaryPopupEvent?.location ?? ""}
-                onChange={(e) => updatePrimaryPopupLocation(e.target.value)}
-                className="mt-2 h-14 w-full rounded-[1.35rem] border border-donut/10 bg-cream px-4 text-base font-semibold text-donut outline-none transition focus:border-carnival-red/40 focus:bg-white"
-                placeholder="Ex: Hutchinson, MN"
-              />
-            </label>
-
             <button
               type="submit"
               disabled={saving}
@@ -180,6 +165,94 @@ export function AdminDashboard({
               {saving ? "Saving Changes..." : "Save Changes"}
             </button>
           </form>
+
+          <div className="mt-8 border-t border-donut/10 pt-6">
+            <h2 className="font-display text-3xl leading-none text-donut-deep">This Week's Schedule</h2>
+            <p className="mt-3 text-base leading-7 text-donut/75">
+              Update where the trailer will be each day, starting with Sunday and ending with Saturday.
+            </p>
+
+            <div className="mt-6 space-y-4">
+              {siteContent.weeklySchedule?.map((day) => (
+                <section key={day.id} className="rounded-[1.5rem] bg-cream p-4">
+                  <div className="flex items-center justify-between gap-4">
+                    <div>
+                      <p className="font-display text-2xl leading-none text-donut-deep">{day.day}</p>
+                      <p className="mt-1 text-sm text-donut/65">
+                        {day.active ? "Scheduled stop" : "Closed / no stop planned"}
+                      </p>
+                    </div>
+                    <button
+                      type="button"
+                      onClick={() => updateWeeklyScheduleAt(day.id, "active", !day.active)}
+                      aria-pressed={day.active}
+                      className={`relative inline-flex h-9 w-16 shrink-0 items-center rounded-full p-1 transition ${
+                        day.active ? "bg-leaf" : "bg-carnival-red/35"
+                      }`}
+                    >
+                      <span
+                        className={`h-7 w-7 rounded-full bg-white shadow-md transition ${
+                          day.active ? "translate-x-7" : "translate-x-0"
+                        }`}
+                      />
+                    </button>
+                  </div>
+
+                  <div className="mt-4 grid gap-4">
+                    <label className="block">
+                      <span className="text-sm font-black text-donut-deep">Location Title</span>
+                      <input
+                        value={day.title}
+                        onChange={(e) => updateWeeklyScheduleAt(day.id, "title", e.target.value)}
+                        className="mt-2 h-12 w-full rounded-[1.2rem] border border-donut/10 bg-white px-4 text-base font-semibold text-donut outline-none transition focus:border-carnival-red/40"
+                        placeholder="Ex: Cash Wise Monday Pop-Up"
+                      />
+                    </label>
+
+                    <label className="block">
+                      <span className="text-sm font-black text-donut-deep">City / Location</span>
+                      <input
+                        value={day.location}
+                        onChange={(e) => updateWeeklyScheduleAt(day.id, "location", e.target.value)}
+                        className="mt-2 h-12 w-full rounded-[1.2rem] border border-donut/10 bg-white px-4 text-base font-semibold text-donut outline-none transition focus:border-carnival-red/40"
+                        placeholder="Ex: Hutchinson, MN"
+                      />
+                    </label>
+
+                    <label className="block">
+                      <span className="text-sm font-black text-donut-deep">Address</span>
+                      <input
+                        value={day.address}
+                        onChange={(e) => updateWeeklyScheduleAt(day.id, "address", e.target.value)}
+                        className="mt-2 h-12 w-full rounded-[1.2rem] border border-donut/10 bg-white px-4 text-base font-semibold text-donut outline-none transition focus:border-carnival-red/40"
+                        placeholder="Street address or parking lot note"
+                      />
+                    </label>
+
+                    <label className="block">
+                      <span className="text-sm font-black text-donut-deep">Hours</span>
+                      <input
+                        value={day.hours}
+                        onChange={(e) => updateWeeklyScheduleAt(day.id, "hours", e.target.value)}
+                        className="mt-2 h-12 w-full rounded-[1.2rem] border border-donut/10 bg-white px-4 text-base font-semibold text-donut outline-none transition focus:border-carnival-red/40"
+                        placeholder="Ex: 12:00 PM - 6:00 PM"
+                      />
+                    </label>
+
+                    <label className="block">
+                      <span className="text-sm font-black text-donut-deep">Notes / Special</span>
+                      <input
+                        value={day.notes}
+                        onChange={(e) => updateWeeklyScheduleAt(day.id, "notes", e.target.value)}
+                        className="mt-2 h-12 w-full rounded-[1.2rem] border border-donut/10 bg-white px-4 text-base font-semibold text-donut outline-none transition focus:border-carnival-red/40"
+                        placeholder="Ex: No scheduled stop"
+                      />
+                    </label>
+                  </div>
+                </section>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
     </div>
