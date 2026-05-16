@@ -20,6 +20,33 @@ export function AdminDashboard({
     }));
   };
 
+  const primaryPopupEvent =
+    siteContent.events?.find((event) => event.id === "1") ?? siteContent.events?.[0] ?? null;
+
+  const updatePrimaryPopupLocation = (value) => {
+    setSiteContent((current) => {
+      const existingEvents = current.events?.length ? current.events : [];
+
+      if (!existingEvents.length) {
+        return current;
+      }
+
+      return {
+        ...current,
+        events: existingEvents.map((event, index) => {
+          const isPrimaryPopup = event.id === "1" || (!existingEvents.some((item) => item.id === "1") && index === 0);
+
+          return isPrimaryPopup
+            ? {
+                ...event,
+                location: value,
+              }
+            : event;
+        }),
+      };
+    });
+  };
+
   return (
     <div className="mx-auto max-w-2xl">
       <div className="overflow-hidden rounded-[2rem] bg-[linear-gradient(145deg,#8f2218,#c53d23_55%,#f2b12d)] p-[1px] shadow-[0_30px_80px_rgba(122,74,43,0.2)]">
@@ -131,6 +158,16 @@ export function AdminDashboard({
                 onChange={(e) => updateTodayLocation("featuredSpecial", e.target.value)}
                 className="mt-2 h-14 w-full rounded-[1.35rem] border border-donut/10 bg-cream px-4 text-base font-semibold text-donut outline-none transition focus:border-carnival-red/40 focus:bg-white"
                 placeholder="Ex: 2 for $10 mini donut special"
+              />
+            </label>
+
+            <label className="block">
+              <span className="text-base font-black text-donut-deep">Pop-Up Location</span>
+              <input
+                value={primaryPopupEvent?.location ?? ""}
+                onChange={(e) => updatePrimaryPopupLocation(e.target.value)}
+                className="mt-2 h-14 w-full rounded-[1.35rem] border border-donut/10 bg-cream px-4 text-base font-semibold text-donut outline-none transition focus:border-carnival-red/40 focus:bg-white"
+                placeholder="Ex: Hutchinson, MN"
               />
             </label>
 

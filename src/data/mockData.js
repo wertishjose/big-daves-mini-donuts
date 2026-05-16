@@ -85,7 +85,7 @@ export const defaultSiteContent = {
     {
       id: "1",
       title: "Cash Wise Monday Stop",
-      location: "Delano, MN",
+      location: "Hutchinson, MN",
       date: "Every Monday",
       time: "12:00 PM - 6:00 PM",
       type: "Grocery Lot Pop-Up",

@@ -84,6 +84,33 @@ function normalizeFeaturedItems(items) {
   });
 }
 
+function normalizeEvents(events) {
+  const defaultEventsById = new Map(defaultSiteContent.events.map((event) => [event.id, event]));
+
+  if (!events?.length) {
+    return defaultSiteContent.events;
+  }
+
+  return events.map((event) => {
+    const defaultEvent = defaultEventsById.get(event.id);
+
+    if (!defaultEvent) {
+      return event;
+    }
+
+    const normalizedLocation =
+      event.id === "1" && (!event.location || event.location === "Delano, MN")
+        ? "Hutchinson, MN"
+        : event.location;
+
+    return {
+      ...defaultEvent,
+      ...event,
+      location: normalizedLocation ?? defaultEvent.location,
+    };
+  });
+}
+
 function mergeSiteContent(payload) {
   return {
     ...defaultSiteContent,
@@ -98,7 +125,7 @@ function mergeSiteContent(payload) {
     },
     featuredItems: normalizeFeaturedItems(payload?.featuredItems),
     testimonials: payload?.testimonials ?? defaultSiteContent.testimonials,
-    events: payload?.events ?? defaultSiteContent.events,
+    events: normalizeEvents(payload?.events),
     promotions: {
       ...defaultSiteContent.promotions,
       ...(payload?.promotions ?? {}),
