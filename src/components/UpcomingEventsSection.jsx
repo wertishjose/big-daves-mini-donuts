@@ -1,4 +1,5 @@
 import { CalendarRange, MapPinned, TentTree } from "lucide-react";
+import { publicImage } from "../lib/publicAsset";
 import { SectionHeading } from "./SectionHeading";
 
 export function UpcomingEventsSection({ events, promotions }) {
@@ -15,7 +16,7 @@ export function UpcomingEventsSection({ events, promotions }) {
           <article className="overflow-hidden rounded-[2rem] bg-white shadow-[0_22px_60px_rgba(122,74,43,0.13)]">
             <div className="bg-[linear-gradient(135deg,#8f2218,#d64f24,#f1b130)] p-4">
               <img
-                src={promotions.image}
+                src={publicImage(promotions.image)}
                 alt="Big Dave promotional event graphic"
                 className="h-full w-full rounded-[1.5rem] object-cover"
               />

@@ -1,4 +1,6 @@
 import { ArrowDownRight, CalendarDays, Clock3, MapPinned } from "lucide-react";
+import { publicImage } from "../lib/publicAsset";
+import { scrollToSection } from "../lib/scrollToSection";
 
 export function HeroSection({ hero, todayLocation }) {
   return (
@@ -6,7 +8,7 @@ export function HeroSection({ hero, todayLocation }) {
       <div className="section-shell">
         <div className="relative overflow-hidden rounded-[2rem] bg-donut-deep shadow-[0_35px_100px_rgba(76,43,24,0.32)]">
           <img
-            src={hero.trailerImage}
+            src={publicImage(hero.trailerImage)}
             alt="Big Dave's Mini Donuts trailer"
             className="absolute inset-0 h-full w-full object-cover object-center"
           />
@@ -43,20 +45,22 @@ export function HeroSection({ hero, todayLocation }) {
                 </p>
 
                 <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-                  <a
-                    href="#find-us"
+                  <button
+                    type="button"
+                    onClick={() => scrollToSection("find-us")}
                     className="cta-shadow inline-flex items-center justify-center gap-2 rounded-full bg-golden px-6 py-4 text-base font-extrabold text-donut-deep transition duration-300 hover:-translate-y-1 hover:bg-golden-soft"
                   >
                     Find Us Today
                     <MapPinned className="h-5 w-5" />
-                  </a>
-                  <a
-                    href="#events"
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => scrollToSection("events")}
                     className="inline-flex items-center justify-center gap-2 rounded-full border border-white/22 bg-white/10 px-6 py-4 text-base font-extrabold text-white backdrop-blur-md transition duration-300 hover:-translate-y-1 hover:bg-white/18"
                   >
                     Upcoming Events
                     <CalendarDays className="h-5 w-5" />
-                  </a>
+                  </button>
                 </div>
               </div>
 
@@ -104,19 +108,20 @@ export function HeroSection({ hero, todayLocation }) {
                       Directions
                       <ArrowDownRight className="h-4 w-4" />
                     </a>
-                    <a
-                      href="#find-us"
+                    <button
+                      type="button"
+                      onClick={() => scrollToSection("find-us")}
                       className="inline-flex items-center gap-2 rounded-full border border-donut/10 bg-white px-5 py-3 text-sm font-extrabold uppercase tracking-[0.14em] text-donut"
                     >
                       View Live Stop
-                    </a>
+                    </button>
                   </div>
                 </div>
 
                 <div className="grid gap-4 sm:grid-cols-[1.08fr_0.92fr]">
                   <div className="relative overflow-hidden rounded-[1.8rem] bg-[#fff4de] shadow-[0_22px_60px_rgba(61,32,17,0.2)]">
                     <img
-                      src={hero.featuredImage ?? hero.foodImage}
+                      src={publicImage(hero.featuredImage ?? hero.foodImage)}
                       alt="Big Dave's featured fair food"
                       className="h-full w-full object-cover transition duration-500 hover:scale-[1.03]"
                     />

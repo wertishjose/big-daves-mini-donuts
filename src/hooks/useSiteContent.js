@@ -35,6 +35,27 @@ function normalizeTodayLocation(location) {
   };
 }
 
+function normalizeImagePath(path, fallbackPath = "") {
+  const value = path ?? fallbackPath;
+
+  if (!value) {
+    return "";
+  }
+
+  if (/^(https?:)?\/\//.test(value) || value.startsWith("data:") || value.startsWith("blob:")) {
+    return value;
+  }
+
+  const basePath = import.meta.env.BASE_URL || "/";
+
+  if (basePath !== "/" && value.startsWith(basePath)) {
+    const strippedBasePath = value.slice(basePath.length);
+    return strippedBasePath.startsWith("/") ? strippedBasePath : `/${strippedBasePath}`;
+  }
+
+  return value.startsWith("/") ? value : `/${value}`;
+}
+
 function normalizeFeaturedItems(items) {
   const defaultItemsById = new Map(
     defaultSiteContent.featuredItems.map((item) => [item.id, item]),
@@ -54,7 +75,7 @@ function normalizeFeaturedItems(items) {
     return {
       ...defaultItem,
       ...item,
-      image: defaultItem.image,
+      image: normalizeImagePath(item.image, defaultItem.image),
       accent: defaultItem.accent,
     };
   });
@@ -68,15 +89,23 @@ function mergeSiteContent(payload) {
     hero: {
       ...defaultSiteContent.hero,
       ...(payload?.hero ?? {}),
+      trailerImage: normalizeImagePath(payload?.hero?.trailerImage, defaultSiteContent.hero.trailerImage),
+      foodImage: normalizeImagePath(payload?.hero?.foodImage, defaultSiteContent.hero.foodImage),
+      featuredImage: normalizeImagePath(payload?.hero?.featuredImage, defaultSiteContent.hero.featuredImage),
     },
     featuredItems: normalizeFeaturedItems(payload?.featuredItems),
     testimonials: payload?.testimonials ?? defaultSiteContent.testimonials,
     events: payload?.events ?? defaultSiteContent.events,
+    promotions: {
+      ...defaultSiteContent.promotions,
+      ...(payload?.promotions ?? {}),
+      image: normalizeImagePath(payload?.promotions?.image, defaultSiteContent.promotions.image),
+    },
   };
 }
 
 export function useSiteContent() {
-  const [siteContent, setSiteContent] = useState(defaultSiteContent);
+  const [siteContent, setSiteContent] = useState(() => mergeSiteContent(defaultSiteContent));
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState("");

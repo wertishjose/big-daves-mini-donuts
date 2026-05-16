@@ -1,4 +1,5 @@
 import { BadgeDollarSign } from "lucide-react";
+import { publicImage } from "../lib/publicAsset";
 import { SectionHeading } from "./SectionHeading";
 
 export function FeaturedFavoritesSection({ items }) {
@@ -22,7 +23,7 @@ export function FeaturedFavoritesSection({ items }) {
               <div className={`relative min-h-[290px] bg-gradient-to-br ${item.accent} p-4 sm:p-5`}>
                 <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.35),transparent_40%)]" />
                 <img
-                  src={item.image}
+                  src={publicImage(item.image)}
                   alt={item.name}
                   className="relative h-full w-full rounded-[1.5rem] object-cover object-center shadow-[0_22px_45px_rgba(76,43,24,0.2)] transition duration-500 hover:scale-[1.03]"
                 />
