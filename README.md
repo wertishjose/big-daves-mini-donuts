@@ -77,3 +77,4 @@ Then run the normal production build.
 - The admin dashboard keeps V1 simple with a lightweight featured-image control instead of a full media library.
 - The public site now uses the real trailer, food, promo, and review reference assets stored under `public/images` and `public/reviews`.
 - Supabase setup steps are documented in [SUPABASE_SETUP.md](/C:/Users/josep/Documents/Codex/2026-05-15/build-a-modern-visually-rich-mobile/SUPABASE_SETUP.md:1).
+deployment test
