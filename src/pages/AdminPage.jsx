@@ -62,23 +62,24 @@ export function AdminPage() {
     setAuthMessage("Signed in.");
   };
 
-  const handleSave = async () => {
-    const result = await saveContent(siteContent);
+  const handleSave = async (nextContent = siteContent) => {
+    const result = await saveContent(nextContent);
 
     if (result.ok && result.mode === "supabase") {
       setSaveState("success");
       setSaveMessage("Saved. Customers are now seeing today's latest business status.");
-      return;
+      return result;
     }
 
     if (result.ok) {
       setSaveState("success");
       setSaveMessage("Saved on this device. Add Supabase later if you want remote updates too.");
-      return;
+      return result;
     }
 
     setSaveState("error");
     setSaveMessage("Save failed. Please check your Supabase table setup.");
+    return result;
   };
 
   const handleSignOut = async () => {

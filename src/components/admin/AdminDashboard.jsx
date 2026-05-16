@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { CheckCircle2, LogOut, MapPin, Save, Sparkles } from "lucide-react";
 
 export function AdminDashboard({
@@ -10,6 +11,15 @@ export function AdminDashboard({
   dataSource,
   onSignOut,
 }) {
+  const [weeklyScheduleDraft, setWeeklyScheduleDraft] = useState(siteContent.weeklySchedule ?? []);
+  const [isWeeklyScheduleDirty, setIsWeeklyScheduleDirty] = useState(false);
+
+  useEffect(() => {
+    if (!isWeeklyScheduleDirty) {
+      setWeeklyScheduleDraft(siteContent.weeklySchedule ?? []);
+    }
+  }, [siteContent.weeklySchedule, isWeeklyScheduleDirty]);
+
   const updateTodayLocation = (field, value) => {
     setSiteContent((current) => ({
       ...current,
@@ -21,25 +31,17 @@ export function AdminDashboard({
   };
 
   const updateWeeklyScheduleAt = (dayId, field, value) => {
-    setSiteContent((current) => {
-      const existingSchedule = current.weeklySchedule?.length ? current.weeklySchedule : [];
-
-      if (!existingSchedule.length) {
-        return current;
-      }
-
-      return {
-        ...current,
-        weeklySchedule: existingSchedule.map((entry) =>
-          entry.id === dayId
-            ? {
-                ...entry,
-                [field]: value,
-              }
-            : entry,
-        ),
-      };
-    });
+    setIsWeeklyScheduleDirty(true);
+    setWeeklyScheduleDraft((current) =>
+      current.map((entry) =>
+        entry.id === dayId
+          ? {
+              ...entry,
+              [field]: value,
+            }
+          : entry,
+      ),
+    );
   };
 
   return (
@@ -87,9 +89,16 @@ export function AdminDashboard({
 
           <form
             className="mt-6 space-y-4"
-            onSubmit={(event) => {
+            onSubmit={async (event) => {
               event.preventDefault();
-              onSave();
+              const result = await onSave({
+                ...siteContent,
+                weeklySchedule: weeklyScheduleDraft,
+              });
+
+              if (result?.ok) {
+                setIsWeeklyScheduleDirty(false);
+              }
             }}
           >
             <label className="block">
@@ -173,7 +182,7 @@ export function AdminDashboard({
             </p>
 
             <div className="mt-6 space-y-4">
-              {siteContent.weeklySchedule?.map((day) => (
+              {weeklyScheduleDraft?.map((day) => (
                 <section key={day.id} className="rounded-[1.5rem] bg-cream p-4">
                   <div className="flex items-center justify-between gap-4">
                     <div>
