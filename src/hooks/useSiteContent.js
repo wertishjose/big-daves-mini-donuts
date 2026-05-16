@@ -125,14 +125,10 @@ function normalizeWeeklySchedule(schedule, events, hasWeeklyScheduleProperty) {
 
       if (existingEntry) {
         return {
+          ...existingEntry,
           id: existingEntry.id ?? defaultEntry.id,
           day: existingEntry.day ?? day,
           active: existingEntry.active === true,
-          title: existingEntry.title ?? "",
-          location: existingEntry.location ?? "",
-          address: existingEntry.address ?? "",
-          hours: existingEntry.hours ?? "",
-          notes: existingEntry.notes ?? "",
         };
       }
 
