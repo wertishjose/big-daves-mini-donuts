@@ -122,19 +122,29 @@ function normalizeWeeklySchedule(schedule, events) {
       const existingEntry =
         schedule.find((entry) => entry.day === day) ??
         schedule.find((entry) => entry.id === day.toLowerCase());
-      const hasExistingEntry = Boolean(existingEntry);
+
+      if (existingEntry) {
+        return {
+          id: existingEntry.id ?? defaultEntry.id,
+          day: existingEntry.day ?? day,
+          active: existingEntry.active === true,
+          title: existingEntry.title ?? "",
+          location: existingEntry.location ?? "",
+          address: existingEntry.address ?? "",
+          hours: existingEntry.hours ?? "",
+          notes: existingEntry.notes ?? "",
+        };
+      }
 
       return {
-        ...defaultEntry,
-        ...(existingEntry ?? {}),
         id: defaultEntry.id,
         day,
-        active: hasExistingEntry ? existingEntry?.active === true : false,
-        title: existingEntry?.title ?? defaultEntry.title,
-        location: existingEntry?.location ?? defaultEntry.location,
-        address: existingEntry?.address ?? defaultEntry.address,
-        hours: existingEntry?.hours ?? defaultEntry.hours,
-        notes: existingEntry?.notes ?? defaultEntry.notes,
+        active: false,
+        title: "",
+        location: "",
+        address: "",
+        hours: "",
+        notes: "",
       };
     });
   }
