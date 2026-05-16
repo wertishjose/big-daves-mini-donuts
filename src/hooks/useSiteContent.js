@@ -111,17 +111,17 @@ function normalizeEvents(events) {
   });
 }
 
-function normalizeWeeklySchedule(schedule, events) {
+function normalizeWeeklySchedule(schedule, events, hasWeeklyScheduleProperty) {
   const defaultScheduleByDay = new Map(
     defaultSiteContent.weeklySchedule.map((entry) => [entry.day, entry]),
   );
 
-  if (schedule?.length) {
+  if (hasWeeklyScheduleProperty) {
     return weeklyScheduleOrder.map((day) => {
       const defaultEntry = defaultScheduleByDay.get(day);
       const existingEntry =
-        schedule.find((entry) => entry.day === day) ??
-        schedule.find((entry) => entry.id === day.toLowerCase());
+        schedule?.find((entry) => entry.day === day) ??
+        schedule?.find((entry) => entry.id === day.toLowerCase());
 
       if (existingEntry) {
         return {
@@ -197,6 +197,9 @@ function normalizeWeeklySchedule(schedule, events) {
 
 function mergeSiteContent(payload) {
   const normalizedEvents = normalizeEvents(payload?.events);
+  const hasWeeklyScheduleProperty = Boolean(
+    payload && Object.prototype.hasOwnProperty.call(payload, "weeklySchedule"),
+  );
 
   return {
     ...defaultSiteContent,
@@ -212,7 +215,11 @@ function mergeSiteContent(payload) {
     featuredItems: normalizeFeaturedItems(payload?.featuredItems),
     testimonials: payload?.testimonials ?? defaultSiteContent.testimonials,
     events: normalizedEvents,
-    weeklySchedule: normalizeWeeklySchedule(payload?.weeklySchedule, normalizedEvents),
+    weeklySchedule: normalizeWeeklySchedule(
+      payload?.weeklySchedule,
+      normalizedEvents,
+      hasWeeklyScheduleProperty,
+    ),
     promotions: {
       ...defaultSiteContent.promotions,
       ...(payload?.promotions ?? {}),
