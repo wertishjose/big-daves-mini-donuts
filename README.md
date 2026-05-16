@@ -11,8 +11,8 @@ Mobile-first React + Vite + Tailwind + Supabase website for a Minnesota food tra
 
 ## Pages
 
-- `/` public website
-- `/admin` password-protected admin dashboard
+- `#/` public website
+- `#/admin` password-protected admin dashboard
 
 ## Setup
 
@@ -28,8 +28,7 @@ This project is prepared for GitHub Pages without redesigning the app.
 ### What is already configured
 
 - Vite reads an optional `VITE_BASE_PATH` in [vite.config.js](/C:/Users/josep/Documents/Codex/2026-05-15/build-a-modern-visually-rich-mobile/vite.config.js:1)
-- React Router uses `import.meta.env.BASE_URL` in [src/main.jsx](/C:/Users/josep/Documents/Codex/2026-05-15/build-a-modern-visually-rich-mobile/src/main.jsx:1)
-- `404.html` provides SPA fallback routing so direct visits to `/admin` still load correctly on GitHub Pages
+- React Router now uses `HashRouter` in [src/main.jsx](/C:/Users/josep/Documents/Codex/2026-05-15/build-a-modern-visually-rich-mobile/src/main.jsx:1)
 - A GitHub Actions workflow is included at [deploy-github-pages.yml](/C:/Users/josep/Documents/Codex/2026-05-15/build-a-modern-visually-rich-mobile/.github/workflows/deploy-github-pages.yml:1)
 
 ### GitHub setup steps
@@ -48,8 +47,11 @@ This project is prepared for GitHub Pages without redesigning the app.
 ### How routing works on GitHub Pages
 
 - The site is built with a repository base path such as `/your-repo-name/`
-- Direct visits to routes like `/admin` are handled by the included `404.html` redirect
-- React Router then restores the correct in-app route
+- Client routes use hash routing, so the admin page works as `#/admin`
+- Example deployed URLs:
+  `https://your-username.github.io/your-repo-name/#/`
+  and
+  `https://your-username.github.io/your-repo-name/#/admin`
 
 ### How environment variables work in deployment
 
@@ -77,4 +79,3 @@ Then run the normal production build.
 - The admin dashboard keeps V1 simple with a lightweight featured-image control instead of a full media library.
 - The public site now uses the real trailer, food, promo, and review reference assets stored under `public/images` and `public/reviews`.
 - Supabase setup steps are documented in [SUPABASE_SETUP.md](/C:/Users/josep/Documents/Codex/2026-05-15/build-a-modern-visually-rich-mobile/SUPABASE_SETUP.md:1).
-deployment test
