@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
+    <meta
+      name="description"
+      content="Find Big Dave's Mini Donuts across Minnesota for hot fresh mini donuts, corn dogs, cotton candy, and family-friendly fair favorites."
+    />
+    <title>Big Dave's Mini Donuts</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&family=Manrope:wght@400;500;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <script>
+      (function restoreGitHubPagesRoute() {
+        const redirect = window.location.search.match(/[?&]p=([^&]+)/);
+
+        if (!redirect) {
+          return;
+        }
+
+        const decodedPath = decodeURIComponent(redirect[1]).replace(/~and~/g, "&");
+        const newUrl = `${window.location.origin}${decodedPath}${window.location.hash}`;
+
+        window.history.replaceState(null, "", newUrl);
+      })();
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+ </html>

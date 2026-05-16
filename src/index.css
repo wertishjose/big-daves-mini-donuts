@@ -1,0 +1,169 @@
+@import "tailwindcss";
+
+:root {
+  --color-carnival-red: #b73224;
+  --color-carnival-red-deep: #8f2218;
+  --color-golden: #f7bf2a;
+  --color-golden-soft: #ffd96f;
+  --color-cream: #fff7eb;
+  --color-cream-deep: #f4e6cd;
+  --color-donut: #7a4a2b;
+  --color-donut-deep: #4c2b18;
+  --color-cotton: #ffe3ef;
+  --color-leaf: #2d7f57;
+  --color-text: #352014;
+  --shadow-card: 0 20px 60px rgba(122, 74, 43, 0.16);
+  --shadow-glow: 0 18px 45px rgba(183, 50, 36, 0.24);
+}
+
+@theme {
+  --font-display: "Baloo 2", cursive;
+  --font-sans: "Manrope", sans-serif;
+  --color-carnival-red: var(--color-carnival-red);
+  --color-carnival-red-deep: var(--color-carnival-red-deep);
+  --color-golden: var(--color-golden);
+  --color-golden-soft: var(--color-golden-soft);
+  --color-cream: var(--color-cream);
+  --color-cream-deep: var(--color-cream-deep);
+  --color-donut: var(--color-donut);
+  --color-donut-deep: var(--color-donut-deep);
+  --color-cotton: var(--color-cotton);
+  --color-leaf: var(--color-leaf);
+  --color-text: var(--color-text);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  background:
+    radial-gradient(circle at top, rgba(255, 217, 111, 0.58), transparent 24%),
+    radial-gradient(circle at 85% 10%, rgba(183, 50, 36, 0.08), transparent 20%),
+    linear-gradient(180deg, #fff8ee 0%, #fff0da 38%, #fff8f1 100%);
+  color: var(--color-text);
+  font-family: var(--font-sans);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.bg-fair-lights {
+  background-image:
+    radial-gradient(circle at 20% 25%, rgba(255, 217, 111, 0.45), transparent 8%),
+    radial-gradient(circle at 80% 15%, rgba(255, 227, 239, 0.5), transparent 11%),
+    radial-gradient(circle at 65% 70%, rgba(247, 191, 42, 0.2), transparent 12%);
+}
+
+.section-shell {
+  @apply mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8;
+}
+
+.section-title {
+  @apply font-display text-4xl leading-none text-donut-deep sm:text-5xl;
+}
+
+.glass-card {
+  background: rgba(255, 250, 241, 0.84);
+  backdrop-filter: blur(16px);
+  box-shadow: var(--shadow-card);
+}
+
+.hero-grid {
+  background-image:
+    linear-gradient(135deg, rgba(255, 247, 235, 0.98), rgba(255, 236, 194, 0.9)),
+    linear-gradient(45deg, rgba(183, 50, 36, 0.08), rgba(247, 191, 42, 0.14));
+}
+
+.hero-night {
+  background:
+    linear-gradient(180deg, rgba(30, 17, 12, 0.18), rgba(30, 17, 12, 0.72)),
+    radial-gradient(circle at top, rgba(247, 191, 42, 0.22), transparent 32%);
+}
+
+.stripe-border {
+  position: relative;
+}
+
+.stripe-border::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(
+    135deg,
+    rgba(183, 50, 36, 0.4),
+    rgba(247, 191, 42, 0.85),
+    rgba(122, 74, 43, 0.35)
+  );
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+.food-frame {
+  background:
+    linear-gradient(180deg, rgba(255, 252, 244, 0.15), rgba(122, 74, 43, 0.3)),
+    radial-gradient(circle at top, rgba(255, 217, 111, 0.44), transparent 48%),
+    linear-gradient(135deg, #9d331f, #f4a62c);
+}
+
+.placeholder-pattern {
+  background-image:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.16) 25%, transparent 25%),
+    linear-gradient(225deg, rgba(255, 255, 255, 0.16) 25%, transparent 25%),
+    linear-gradient(45deg, rgba(255, 255, 255, 0.16) 25%, transparent 25%),
+    linear-gradient(315deg, rgba(255, 255, 255, 0.16) 25%, transparent 25%);
+  background-position: 14px 0, 14px 0, 0 0, 0 0;
+  background-size: 28px 28px;
+}
+
+.cta-shadow {
+  box-shadow: var(--shadow-glow);
+}
+
+.carnival-dots {
+  background-image: radial-gradient(rgba(255, 217, 111, 0.4) 1.4px, transparent 1.4px);
+  background-size: 18px 18px;
+}
+
+.ticket-cut {
+  position: relative;
+}
+
+.ticket-cut::before,
+.ticket-cut::after {
+  content: "";
+  position: absolute;
+  left: -12px;
+  height: 24px;
+  width: 24px;
+  border-radius: 999px;
+  background: #fff5e8;
+}
+
+.ticket-cut::before {
+  top: 24px;
+}
+
+.ticket-cut::after {
+  bottom: 24px;
+}
+
+.soft-ring {
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.3),
+    0 24px 70px rgba(69, 34, 17, 0.18);
+}
