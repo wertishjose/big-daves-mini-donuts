@@ -75,6 +75,10 @@ function normalizeFeaturedItems(items) {
     return {
       ...defaultItem,
       ...item,
+      badge: defaultItem.badge,
+      price: defaultItem.price,
+      bonus: defaultItem.bonus,
+      description: defaultItem.description,
       image:
         item.id === "cotton-candy"
           ? "/images/cotton-candy.jpg"

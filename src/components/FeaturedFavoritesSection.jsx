@@ -32,7 +32,7 @@ export function FeaturedFavoritesSection({ items }) {
               <div className="flex flex-col justify-center p-5 sm:p-7">
                 <div className="inline-flex max-w-max items-center gap-2 rounded-full bg-[#fff2d7] px-4 py-2 text-sm font-black uppercase tracking-[0.18em] text-carnival-red">
                   <BadgeDollarSign className="h-4 w-4" />
-                  Fair Favorite
+                  {item.badge}
                 </div>
                 <h3 className="mt-5 font-display text-4xl leading-none text-donut-deep sm:text-5xl">{item.name}</h3>
                 <p className="mt-4 max-w-lg text-lg leading-8 text-donut/78">{item.description}</p>
