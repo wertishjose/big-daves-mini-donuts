@@ -1,6 +1,62 @@
+import { useState } from "react";
 import { BellRing, Send } from "lucide-react";
+import { hasSupabaseEnv, supabase } from "../lib/supabase";
 
 export function DonutAlertsSection() {
+  const [email, setEmail] = useState("");
+  const [status, setStatus] = useState("idle");
+  const [message, setMessage] = useState(
+    "Sign up for future location updates, menu specials, and trailer announcements.",
+  );
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+
+    const normalizedEmail = email.trim().toLowerCase();
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    if (!normalizedEmail) {
+      setStatus("error");
+      setMessage("Please enter your email address.");
+      return;
+    }
+
+    if (!emailPattern.test(normalizedEmail)) {
+      setStatus("error");
+      setMessage("Please enter a valid email address.");
+      return;
+    }
+
+    if (!hasSupabaseEnv || !supabase) {
+      setStatus("error");
+      setMessage("Email signup is not connected yet. Please check back soon.");
+      return;
+    }
+
+    setStatus("loading");
+    setMessage("Joining the list...");
+
+    const { error } = await supabase.from("email_signups").insert({
+      email: normalizedEmail,
+    });
+
+    if (error?.code === "23505") {
+      setStatus("success");
+      setMessage("Looks like you're already on the list.");
+      return;
+    }
+
+    if (error) {
+      setStatus("error");
+      setMessage("We couldn't save your email right now. Please try again.");
+      return;
+    }
+
+    setEmail("");
+    setStatus("success");
+    setMessage("You're on the list. We'll share future stops, specials, and trailer updates.");
+  };
+
   return (
     <section className="px-4 py-12 sm:px-6 lg:px-8 lg:py-16">
       <div className="section-shell">
@@ -15,7 +71,10 @@ export function DonutAlertsSection() {
                 Get notified when Big Dave comes to your town plus occasional specials and event updates.
               </p>
             </div>
-            <form className="rounded-[1.75rem] bg-white/10 p-4 backdrop-blur-md sm:p-5">
+            <form
+              className="rounded-[1.75rem] bg-white/10 p-4 backdrop-blur-md sm:p-5"
+              onSubmit={handleSubmit}
+            >
               <label htmlFor="email" className="text-sm font-bold uppercase tracking-[0.22em] text-golden-soft">
                 Email Address
               </label>
@@ -23,18 +82,28 @@ export function DonutAlertsSection() {
                 <input
                   id="email"
                   type="email"
+                  value={email}
+                  onChange={(event) => setEmail(event.target.value)}
                   placeholder="you@example.com"
+                  autoComplete="email"
                   className="h-14 flex-1 rounded-full border border-white/15 bg-white px-5 text-base font-semibold text-donut outline-none ring-0 placeholder:text-donut/40"
                 />
                 <button
-                  type="button"
-                  className="inline-flex h-14 items-center justify-center gap-2 rounded-full bg-golden px-6 text-base font-extrabold text-donut-deep transition duration-300 hover:-translate-y-1 hover:bg-golden-soft"
+                  type="submit"
+                  disabled={status === "loading"}
+                  className="inline-flex h-14 items-center justify-center gap-2 rounded-full bg-golden px-6 text-base font-extrabold text-donut-deep transition duration-300 hover:-translate-y-1 hover:bg-golden-soft disabled:cursor-not-allowed disabled:opacity-70"
                 >
-                  Sign Up
+                  {status === "loading" ? "Joining..." : "Join the Update List"}
                   <Send className="h-4 w-4" />
                 </button>
               </div>
-              <p className="mt-3 text-sm text-white/70">Join the list for schedule updates, new stops, and special menu announcements.</p>
+              <p
+                className={`mt-3 text-sm ${
+                  status === "error" ? "text-[#ffd7ce]" : "text-white/70"
+                }`}
+              >
+                {message}
+              </p>
             </form>
           </div>
         </div>

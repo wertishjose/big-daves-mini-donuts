@@ -23,6 +23,26 @@ to authenticated
 using (true)
 with check (true);
 
+create table if not exists public.email_signups (
+  id uuid primary key default gen_random_uuid(),
+  email text not null,
+  first_name text null,
+  created_at timestamptz not null default now()
+);
+
+create unique index if not exists email_signups_email_unique_idx
+on public.email_signups (lower(email));
+
+alter table public.email_signups enable row level security;
+
+drop policy if exists "Allow public users to add email signups" on public.email_signups;
+
+create policy "Allow public users to add email signups"
+on public.email_signups
+for insert
+to anon, authenticated
+with check (email = lower(email));
+
 insert into public.site_content (slug, content)
 values (
   'main',
