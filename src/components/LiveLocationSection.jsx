@@ -12,7 +12,6 @@ export function LiveLocationSection({ location }) {
             <SectionHeading
               eyebrow="Find Big Dave Today 🍩"
               title="The fastest way to figure out where the trailer is right now."
-              body="Built as the operational centerpiece of the site, with today's stop, current hours, live status, and one-tap directions all in the same place."
               tone="light"
             />
             <div className="mt-8 grid gap-5 lg:grid-cols-[0.94fr_1.06fr]">

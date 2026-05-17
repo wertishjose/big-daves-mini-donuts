@@ -9,7 +9,7 @@ export function FeaturedFavoritesSection({ items }) {
         <SectionHeading
           eyebrow="Featured Favorites"
           title="Real trailer favorites styled to feel warm, local, and impossible to scroll past."
-          body="The menu stays simple, but the presentation should still feel rich, family-friendly, and appetizing on a phone."
+          body="Simple favorites, fresh-made treats, and crowd-pleasing snacks served hot and ready."
         />
 
         <div className="mt-8 space-y-5">

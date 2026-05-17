@@ -22,8 +22,7 @@ export function TestimonialsSection({ testimonials }) {
       <div className="section-shell">
         <SectionHeading
           eyebrow="Reviews"
-          title="Real local praise that makes the trailer feel trusted before the first bite."
-          body="These are adapted from real Facebook recommendations, restyled here as clean testimonial cards instead of screenshot embeds."
+          body="Local customers sharing their favorite stops, snacks, and sweet treats from the trailer."
           align="center"
         />
 

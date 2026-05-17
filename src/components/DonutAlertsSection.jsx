@@ -34,7 +34,7 @@ export function DonutAlertsSection() {
                   <Send className="h-4 w-4" />
                 </button>
               </div>
-              <p className="mt-3 text-sm text-white/70">Signup is a front-end placeholder for V1.</p>
+              <p className="mt-3 text-sm text-white/70">Join the list for schedule updates, new stops, and special menu announcements.</p>
             </form>
           </div>
         </div>
