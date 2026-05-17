@@ -3,6 +3,7 @@ import { BellRing, Send } from "lucide-react";
 import { hasSupabaseEnv, supabase } from "../lib/supabase";
 
 export function DonutAlertsSection() {
+  const [firstName, setFirstName] = useState("");
   const [email, setEmail] = useState("");
   const [status, setStatus] = useState("idle");
   const [message, setMessage] = useState(
@@ -38,6 +39,7 @@ export function DonutAlertsSection() {
 
     const { error } = await supabase.from("email_signups").insert({
       email: normalizedEmail,
+      first_name: firstName.trim() || null,
     });
 
     if (error?.code === "23505") {
@@ -52,6 +54,7 @@ export function DonutAlertsSection() {
       return;
     }
 
+    setFirstName("");
     setEmail("");
     setStatus("success");
     setMessage("You're on the list. We'll share future stops, specials, and trailer updates.");
@@ -75,6 +78,18 @@ export function DonutAlertsSection() {
               className="rounded-[1.75rem] bg-white/10 p-4 backdrop-blur-md sm:p-5"
               onSubmit={handleSubmit}
             >
+              <label htmlFor="first-name" className="text-sm font-bold uppercase tracking-[0.22em] text-golden-soft">
+                First name (optional)
+              </label>
+              <input
+                id="first-name"
+                type="text"
+                value={firstName}
+                onChange={(event) => setFirstName(event.target.value)}
+                placeholder="First name (optional)"
+                autoComplete="given-name"
+                className="mt-3 h-14 w-full rounded-full border border-white/15 bg-white px-5 text-base font-semibold text-donut outline-none ring-0 placeholder:text-donut/40"
+              />
               <label htmlFor="email" className="text-sm font-bold uppercase tracking-[0.22em] text-golden-soft">
                 Email Address
               </label>
