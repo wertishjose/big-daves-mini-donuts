@@ -35,7 +35,7 @@ export const defaultSiteContent = {
       name: "Corn Dogs",
       badge: "Savory Favorite",
       price: "Corn Dogs $6",
-      bonus: "Fresh & Crispy",
+      bonus: "Fresh & Crispy • 2 for $10",
       description: "Golden, crispy, and hot with a savory center that's easy to grab and enjoy on the go.",
       image: "/images/697262911_122263167326059769_8878770367604943364_n.jpg",
       accent: "from-[#ffcf94] via-[#f6a64f] to-[#c16c1d]",
