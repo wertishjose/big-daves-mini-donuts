@@ -1,4 +1,5 @@
 import { ArrowDownRight, CalendarDays, Clock3, MapPinned } from "lucide-react";
+import { BrandLogo } from "./BrandLogo";
 import { publicImage } from "../lib/publicAsset";
 import { scrollToSection } from "../lib/scrollToSection";
 
@@ -30,11 +31,11 @@ export function HeroSection({ hero, todayLocation }) {
                   </div>
                 </div>
 
-                <div className="mt-5 inline-flex max-w-max rounded-[1.5rem] border border-dashed border-white/35 bg-white/10 px-5 py-4 text-white backdrop-blur-md">
-                  <div>
-                    <p className="font-display text-2xl leading-none text-golden-soft">Future Logo Area</p>
-                    <p className="mt-1 text-sm text-white/74">Reserved for the official Big Dave's logo lockup.</p>
-                  </div>
+                <div className="mt-5 inline-flex max-w-max items-center rounded-[1.5rem] bg-white/92 px-4 py-3 text-donut shadow-[0_18px_45px_rgba(0,0,0,0.18)] backdrop-blur-md">
+                  <BrandLogo
+                    className="h-20 w-auto rounded-full object-contain sm:h-24"
+                    alt="Big Dave's Mini Donuts primary logo"
+                  />
                 </div>
 
                 <h1 className="mt-6 max-w-xl font-display text-5xl leading-[0.92] text-white drop-shadow-[0_10px_30px_rgba(0,0,0,0.34)] sm:text-6xl lg:text-7xl">
