@@ -1,5 +1,6 @@
 import { CalendarRange, MapPinned, Store, TentTree } from "lucide-react";
 import { publicImage } from "../lib/publicAsset";
+import { BrandLogo } from "./BrandLogo";
 import { SectionHeading } from "./SectionHeading";
 
 export function UpcomingEventsSection({ weeklySchedule, promotions }) {
@@ -17,12 +18,19 @@ export function UpcomingEventsSection({ weeklySchedule, promotions }) {
 
         <div className="mt-8 grid gap-5 lg:grid-cols-[0.92fr_1.08fr]">
           <article className="overflow-hidden rounded-[2rem] bg-white shadow-[0_22px_60px_rgba(122,74,43,0.13)]">
-            <div className="bg-[linear-gradient(135deg,#8f2218,#d64f24,#f1b130)] p-4">
+            <div className="relative bg-[linear-gradient(135deg,#8f2218,#d64f24,#f1b130)] p-4">
               <img
                 src={publicImage(promotions.image)}
                 alt="Big Dave promotional event graphic"
                 className="h-full w-full rounded-[1.5rem] object-cover"
               />
+              <div className="absolute bottom-7 right-7 hidden rounded-[1.1rem] bg-white/92 p-2 shadow-[0_16px_40px_rgba(61,32,17,0.24)] sm:block">
+                <BrandLogo
+                  variant="miniDonutsToday"
+                  className="h-16 w-auto object-contain lg:h-20"
+                  alt="Mini donuts today sign graphic"
+                />
+              </div>
             </div>
             <div className="p-5 sm:p-6">
               <p className="text-sm font-black uppercase tracking-[0.22em] text-carnival-red">Promotions + Pop-Ups</p>

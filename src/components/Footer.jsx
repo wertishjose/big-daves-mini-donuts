@@ -6,7 +6,11 @@ export function Footer() {
       <div className="section-shell rounded-[2rem] bg-[#fff5e1] px-5 py-6 text-sm text-donut/75 shadow-[0_12px_40px_rgba(122,74,43,0.08)] sm:px-6">
         <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:gap-5">
           <div className="inline-flex max-w-max rounded-full bg-white p-2 shadow-[0_12px_28px_rgba(122,74,43,0.12)]">
-            <BrandLogo className="h-20 w-auto rounded-full object-contain" />
+            <BrandLogo
+              variant="greenBadge"
+              className="h-20 w-auto rounded-full object-contain"
+              alt="Big Dave's Mini Donuts secondary badge logo"
+            />
           </div>
           <div>
             <p className="font-display text-2xl text-donut-deep">Big Dave's Mini Donuts</p>

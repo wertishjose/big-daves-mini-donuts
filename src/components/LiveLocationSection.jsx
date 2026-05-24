@@ -69,10 +69,10 @@ export function LiveLocationSection({ location }) {
                     href={location.directionsUrl}
                     target="_blank"
                     rel="noreferrer"
-                    className="inline-flex items-center justify-center gap-2 rounded-full bg-carnival-red px-5 py-4 text-base font-extrabold text-white transition duration-300 hover:-translate-y-1 hover:bg-carnival-red-deep"
+                    className="inline-flex items-center justify-center gap-2 rounded-full bg-carnival-red px-5 py-4 text-base font-extrabold text-white transition duration-300 hover:-translate-y-1 hover:bg-carnival-red-deep hover:text-white focus-visible:text-white"
                   >
-                    Get Directions
-                    <Navigation className="h-5 w-5" />
+                    <span className="text-white">Get Directions</span>
+                    <Navigation className="h-5 w-5 text-white" />
                   </a>
                   <a
                     href={`tel:${location.phone?.replaceAll(/[^0-9+]/g, "") ?? "+13205551234"}`}

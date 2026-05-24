@@ -11,16 +11,21 @@ export function HeroSection({ hero, todayLocation }) {
           <img
             src={publicImage(hero.trailerImage)}
             alt="Big Dave's Mini Donuts trailer"
-            className="absolute inset-0 h-full w-full object-cover object-center"
+            className="absolute inset-0 h-full w-full object-cover object-[52%_center] sm:object-[50%_center] lg:object-[50%_34%]"
           />
           <div className="hero-night absolute inset-0" />
-          <div className="absolute inset-0 bg-[linear-gradient(110deg,rgba(33,18,12,0.84)_0%,rgba(33,18,12,0.72)_38%,rgba(33,18,12,0.18)_74%,rgba(33,18,12,0.45)_100%)]" />
+          <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(25,13,9,0.38)_0%,rgba(25,13,9,0.76)_100%)] sm:bg-[linear-gradient(180deg,rgba(25,13,9,0.28)_0%,rgba(25,13,9,0.64)_100%)]" />
+          <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(22,10,7,0.96)_0%,rgba(22,10,7,0.86)_42%,rgba(22,10,7,0.44)_74%,rgba(22,10,7,0.28)_100%)] lg:bg-[linear-gradient(110deg,rgba(33,18,12,0.86)_0%,rgba(33,18,12,0.7)_34%,rgba(33,18,12,0.18)_70%,rgba(33,18,12,0.36)_100%)]" />
           <div className="absolute inset-x-0 top-0 h-24 bg-[radial-gradient(circle_at_top,rgba(255,217,111,0.28),transparent_70%)]" />
+          <div className="absolute inset-x-0 bottom-0 h-40 bg-[linear-gradient(180deg,transparent,rgba(26,13,8,0.38))]" />
 
-          <div className="relative grid min-h-[720px] gap-8 px-5 py-6 sm:px-8 sm:py-8 lg:min-h-[760px] lg:grid-cols-[1.05fr_0.95fr] lg:px-10 lg:py-10">
+          <div className="relative grid min-h-[600px] gap-8 px-5 py-6 sm:min-h-[640px] sm:px-8 sm:py-8 lg:min-h-[660px] lg:grid-cols-[1.05fr_0.95fr] lg:px-10 lg:py-10">
             <div className="flex flex-col justify-between">
               <div>
-                <div className="flex flex-wrap items-center gap-3">
+                <p className="font-display text-4xl leading-none tracking-[0.03em] text-white drop-shadow-[0_12px_28px_rgba(0,0,0,0.38)] sm:text-5xl lg:text-[3.6rem]">
+                  Big Dave&apos;s Mini Donuts
+                </p>
+                <div className="mt-5 flex flex-wrap items-center gap-3">
                   <div className="inline-flex items-center gap-3 rounded-full bg-white/15 px-4 py-2 text-sm font-semibold text-white backdrop-blur-md">
                     <span className="inline-flex h-3 w-3 rounded-full bg-golden" />
                     Minnesota fair-food trailer
@@ -31,19 +36,21 @@ export function HeroSection({ hero, todayLocation }) {
                   </div>
                 </div>
 
-                <div className="mt-5 inline-flex max-w-max items-center rounded-[1.5rem] bg-white/92 px-4 py-3 text-donut shadow-[0_18px_45px_rgba(0,0,0,0.18)] backdrop-blur-md">
+                <div className="mt-5 inline-flex h-36 w-36 items-center justify-center overflow-hidden rounded-full bg-[radial-gradient(circle_at_50%_42%,rgba(255,255,255,0.98),rgba(255,247,231,0.9)_62%,rgba(255,233,189,0.74)_100%)] p-0 text-donut shadow-[0_22px_52px_rgba(0,0,0,0.22)] ring-1 ring-white/20 backdrop-blur-md sm:h-42 sm:w-42 lg:h-46 lg:w-46">
                   <BrandLogo
-                    className="h-20 w-auto rounded-full object-contain sm:h-24"
+                    className="h-[84%] w-[84%] shrink-0 translate-x-[-0.5%] translate-y-[1.25%] object-contain object-center"
                     alt="Big Dave's Mini Donuts primary logo"
                   />
                 </div>
 
-                <h1 className="mt-6 max-w-xl font-display text-5xl leading-[0.92] text-white drop-shadow-[0_10px_30px_rgba(0,0,0,0.34)] sm:text-6xl lg:text-7xl">
-                  {hero.headline}
-                </h1>
-                <p className="mt-5 max-w-xl text-lg leading-8 text-white/84 sm:text-xl">
-                  {hero.subheadline}
-                </p>
+                <div className="mt-6 max-w-2xl rounded-[2rem] bg-[linear-gradient(135deg,rgba(24,11,8,0.82),rgba(24,11,8,0.58)_56%,rgba(24,11,8,0.28)_100%)] px-5 py-5 shadow-[0_24px_60px_rgba(0,0,0,0.2)] backdrop-blur-[6px] sm:px-6 sm:py-6">
+                  <h1 className="max-w-xl font-display text-5xl leading-[0.92] text-white drop-shadow-[0_14px_36px_rgba(0,0,0,0.5)] sm:text-6xl lg:text-7xl">
+                    {hero.headline}
+                  </h1>
+                  <p className="mt-5 max-w-lg text-lg leading-8 text-white/92 drop-shadow-[0_8px_24px_rgba(0,0,0,0.34)] sm:text-xl">
+                    {hero.subheadline}
+                  </p>
+                </div>
 
                 <div className="mt-8 flex flex-col gap-3 sm:flex-row">
                   <button
@@ -104,10 +111,10 @@ export function HeroSection({ hero, todayLocation }) {
                       href={todayLocation.directionsUrl}
                       target="_blank"
                       rel="noreferrer"
-                      className="inline-flex items-center gap-2 rounded-full bg-carnival-red px-5 py-3 text-sm font-extrabold uppercase tracking-[0.14em] text-white transition hover:-translate-y-1 hover:bg-carnival-red-deep"
+                      className="inline-flex items-center gap-2 rounded-full bg-carnival-red px-5 py-3 text-sm font-extrabold uppercase tracking-[0.14em] text-white transition hover:-translate-y-1 hover:bg-carnival-red-deep hover:text-white focus-visible:text-white"
                     >
-                      Directions
-                      <ArrowDownRight className="h-4 w-4" />
+                      <span className="text-white">Directions</span>
+                      <ArrowDownRight className="h-4 w-4 text-white" />
                     </a>
                     <button
                       type="button"
@@ -126,9 +133,14 @@ export function HeroSection({ hero, todayLocation }) {
                       alt="Big Dave's featured fair food"
                       className="h-full w-full object-cover transition duration-500 hover:scale-[1.03]"
                     />
-                    <div className="absolute inset-x-0 bottom-0 bg-[linear-gradient(180deg,transparent,rgba(46,24,15,0.82))] p-5 text-white">
-                      <p className="text-xs font-black uppercase tracking-[0.2em] text-golden-soft">Fresh Fair Favorites</p>
-                      <p className="mt-2 font-display text-3xl leading-none">Hot mini donuts, corn dogs, and sweet summer extras.</p>
+                    <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(28,14,9,0.08)_0%,rgba(28,14,9,0.18)_38%,rgba(28,14,9,0.86)_72%,rgba(28,14,9,0.94)_100%)]" />
+                    <div className="absolute inset-x-0 bottom-0 p-5 pb-10 text-white sm:pb-8 lg:bottom-48 lg:pb-8 xl:bottom-52 2xl:bottom-56">
+                      <div className="max-w-[18rem] rounded-[1.4rem] bg-[linear-gradient(135deg,rgba(24,11,8,0.78),rgba(24,11,8,0.54)_62%,rgba(24,11,8,0.28)_100%)] px-4 py-4 shadow-[0_18px_40px_rgba(0,0,0,0.24)] backdrop-blur-[4px] lg:bg-[linear-gradient(135deg,rgba(20,9,6,0.88),rgba(20,9,6,0.68)_58%,rgba(20,9,6,0.42)_100%)] lg:shadow-[0_22px_48px_rgba(0,0,0,0.28)] lg:backdrop-blur-[6px] lg:py-3.5">
+                        <p className="text-xs font-black uppercase tracking-[0.2em] text-golden-soft">Fresh Fair Favorites</p>
+                        <p className="mt-2 font-display text-3xl leading-none drop-shadow-[0_10px_24px_rgba(0,0,0,0.5)] lg:mt-1.5">
+                          Hot mini donuts, corn dogs, and sweet summer extras.
+                        </p>
+                      </div>
                     </div>
                   </div>
 

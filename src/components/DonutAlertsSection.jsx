@@ -1,8 +1,11 @@
 import { useState } from "react";
 import { BellRing, Send } from "lucide-react";
+import { BrandLogo } from "./BrandLogo";
 import { hasSupabaseEnv, supabase } from "../lib/supabase";
 
 export function DonutAlertsSection() {
+  const inputClassName =
+    "mt-3 h-14 w-full rounded-full border border-white/15 bg-white px-5 text-base font-semibold leading-none text-donut outline-none ring-0 placeholder:text-donut/40";
   const [firstName, setFirstName] = useState("");
   const [email, setEmail] = useState("");
   const [status, setStatus] = useState("idle");
@@ -73,40 +76,51 @@ export function DonutAlertsSection() {
               <p className="mt-4 max-w-xl text-lg leading-8 text-white/78">
                 Get notified when Big Dave comes to your town plus occasional specials and event updates.
               </p>
+              <div className="mt-5 inline-flex rounded-[1.25rem] bg-white/10 px-4 py-3 backdrop-blur-md">
+                <BrandLogo
+                  variant="lilOrbits"
+                  className="h-12 w-auto object-contain opacity-95"
+                  alt="Lil' Orbits logo"
+                />
+              </div>
             </div>
             <form
               className="rounded-[1.75rem] bg-white/10 p-4 backdrop-blur-md sm:p-5"
               onSubmit={handleSubmit}
             >
-              <label htmlFor="first-name" className="text-sm font-bold uppercase tracking-[0.22em] text-golden-soft">
-                First name (optional)
-              </label>
-              <input
-                id="first-name"
-                type="text"
-                value={firstName}
-                onChange={(event) => setFirstName(event.target.value)}
-                placeholder="First name (optional)"
-                autoComplete="given-name"
-                className="mt-3 h-14 w-full rounded-full border border-white/15 bg-white px-5 text-base font-semibold text-donut outline-none ring-0 placeholder:text-donut/40"
-              />
-              <label htmlFor="email" className="text-sm font-bold uppercase tracking-[0.22em] text-golden-soft">
-                Email Address
-              </label>
-              <div className="mt-3 flex flex-col gap-3 sm:flex-row">
+              <div>
+                <label htmlFor="first-name" className="text-sm font-bold uppercase tracking-[0.22em] text-golden-soft">
+                  First name (optional)
+                </label>
                 <input
-                  id="email"
-                  type="email"
-                  value={email}
-                  onChange={(event) => setEmail(event.target.value)}
-                  placeholder="you@example.com"
-                  autoComplete="email"
-                  className="h-14 flex-1 rounded-full border border-white/15 bg-white px-5 text-base font-semibold text-donut outline-none ring-0 placeholder:text-donut/40"
+                  id="first-name"
+                  type="text"
+                  value={firstName}
+                  onChange={(event) => setFirstName(event.target.value)}
+                  placeholder="First name (optional)"
+                  autoComplete="given-name"
+                  className={inputClassName}
                 />
+              </div>
+              <div className="mt-3">
+                <label htmlFor="email" className="text-sm font-bold uppercase tracking-[0.22em] text-golden-soft">
+                  Email Address
+                </label>
+                <div className="mt-3">
+                  <input
+                    id="email"
+                    type="email"
+                    value={email}
+                    onChange={(event) => setEmail(event.target.value)}
+                    placeholder="you@example.com"
+                    autoComplete="email"
+                    className={`${inputClassName} mt-0`}
+                  />
+                </div>
                 <button
                   type="submit"
                   disabled={status === "loading"}
-                  className="inline-flex h-14 items-center justify-center gap-2 rounded-full bg-golden px-6 text-base font-extrabold text-donut-deep transition duration-300 hover:-translate-y-1 hover:bg-golden-soft disabled:cursor-not-allowed disabled:opacity-70"
+                  className="mt-3 inline-flex h-14 w-full items-center justify-center gap-2 rounded-full bg-golden px-6 text-base font-extrabold text-donut-deep transition duration-300 hover:-translate-y-1 hover:bg-golden-soft disabled:cursor-not-allowed disabled:opacity-70"
                 >
                   {status === "loading" ? "Joining..." : "Join the Update List"}
                   <Send className="h-4 w-4" />
