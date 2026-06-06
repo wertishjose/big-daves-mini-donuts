@@ -2,11 +2,57 @@ export const defaultSiteContent = {
   hero: {
     headline: "Hot Fresh Mini Donuts When We're In Your Town 🍩",
     subheadline:
-      "Find Big Dave's current location, upcoming events, and fresh fair-style favorites across Minnesota.",
+      "Fresh mini donuts, corn dogs, cotton candy, and crowd favorites for fairs, festivals, community events, and private bookings across Minnesota.",
     trailerImage: "/images/661908500_122259026036059769_238648391896525221_n.jpg",
     foodImage: "/images/663107727_122259026348059769_347286374704656782_n.jpg",
     featuredImage: "/images/696792504_122263002350059769_6589352645923373101_n.jpg",
   },
+  whereYouCanFindUs: {
+    title: "Where You Can Find Us",
+    body:
+      "Big Dave's Mini Donuts serves Minnesota fairs, festivals, school events, church events, community celebrations, and private bookings throughout the season.",
+    areas: [
+      "Hutchinson, Delano, and surrounding communities",
+      "West-central Minnesota and the Twin Cities west metro",
+      "County fairs, festival grounds, school lots, and event venues",
+    ],
+    eventTypes: [
+      "County and community fairs",
+      "Festivals and city celebrations",
+      "School, church, and fundraiser events",
+      "Private parties and booked gatherings",
+    ],
+  },
+  typicalSchedule: {
+    title: "Typical Schedule",
+    body:
+      "Big Dave's Mini Donuts attends fairs, festivals, community events, and private bookings throughout the season. The calendar changes week to week, so the website focuses on the kinds of stops the trailer serves most often.",
+    items: [
+      {
+        id: "typical-1",
+        title: "Community Events",
+        body: "Seasonal city celebrations, downtown gatherings, and family-friendly weekend events.",
+      },
+      {
+        id: "typical-2",
+        title: "Fairs and Festivals",
+        body: "Summer fairgrounds, local festivals, and event weekends where fresh hot food is part of the experience.",
+      },
+      {
+        id: "typical-3",
+        title: "Private Bookings",
+        body: "School functions, church events, corporate gatherings, and private parties booked in advance.",
+      },
+    ],
+  },
+  bookingTypes: [
+    "Festivals",
+    "Community Events",
+    "School Events",
+    "Church Events",
+    "Corporate Events",
+    "Private Parties",
+  ],
   todayLocation: {
     venue: "Cash Wise Monday Pop-Up",
     address: "1300 Babcock Blvd E, Delano, MN 55328",
@@ -183,9 +229,9 @@ export const defaultSiteContent = {
     },
   ],
   promotions: {
-    title: "Catch the bright red trailer when it rolls into your neighborhood.",
+    title: "Book the bright red trailer for events people remember.",
     body:
-      "From weekly grocery-lot stops to summer festival weekends, Big Dave's setup feels right at home anywhere families are looking for something fresh, nostalgic, and fun.",
+      "From community events and school gatherings to private parties and seasonal festivals, Big Dave's setup is built to serve fresh favorites wherever families are ready for a sweet stop.",
     image: "/images/696792504_122263002350059769_6589352645923373101_n.jpg",
   },
 };

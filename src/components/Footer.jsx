@@ -15,7 +15,7 @@ export function Footer() {
           <div>
             <p className="font-display text-2xl text-donut-deep">Big Dave's Mini Donuts</p>
             <p className="mt-2 max-w-2xl text-base leading-7">
-              Warm fair favorites, real Minnesota pop-ups, and a site designed to help families quickly find the trailer, the hours, and the next fresh batch.
+              Warm favorites, local event service, and a simple site built to stay useful for families, communities, and event organizers all season long.
             </p>
           </div>
         </div>

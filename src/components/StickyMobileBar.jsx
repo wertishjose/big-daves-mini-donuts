@@ -1,7 +1,7 @@
-import { MapPinned, Navigation, PhoneCall } from "lucide-react";
+import { Camera, MapPinned, PhoneCall } from "lucide-react";
 import { scrollToSection } from "../lib/scrollToSection";
 
-export function StickyMobileBar({ directionsUrl, phone = "(320) 555-1234" }) {
+export function StickyMobileBar({ phone = "(320) 555-1234" }) {
   return (
     <div className="fixed inset-x-0 bottom-0 z-50 border-t border-donut/10 bg-[#fff7ea]/95 px-4 py-3 backdrop-blur-md lg:hidden">
       <div className="mx-auto grid max-w-xl grid-cols-3 gap-3">
@@ -17,10 +17,14 @@ export function StickyMobileBar({ directionsUrl, phone = "(320) 555-1234" }) {
           <PhoneCall className="mb-1 h-5 w-5" />
           Call
         </a>
-        <a href={directionsUrl} target="_blank" rel="noreferrer" className="inline-flex flex-col items-center justify-center rounded-2xl bg-golden px-3 py-3 text-xs font-black uppercase tracking-[0.14em] text-donut-deep shadow-lg shadow-amber-800/20">
-          <Navigation className="mb-1 h-5 w-5" />
-          Directions
-        </a>
+        <button
+          type="button"
+          onClick={() => scrollToSection("gallery")}
+          className="inline-flex flex-col items-center justify-center rounded-2xl bg-golden px-3 py-3 text-xs font-black uppercase tracking-[0.14em] text-donut-deep shadow-lg shadow-amber-800/20"
+        >
+          <Camera className="mb-1 h-5 w-5" />
+          Gallery
+        </button>
       </div>
     </div>
   );

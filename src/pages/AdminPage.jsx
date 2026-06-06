@@ -5,7 +5,7 @@ import { useSiteContent } from "../hooks/useSiteContent";
 import { hasSupabaseEnv, supabase } from "../lib/supabase";
 
 export function AdminPage() {
-  const { siteContent, setSiteContent, saveContent, saving, source } = useSiteContent();
+  const { source } = useSiteContent();
   const [session, setSession] = useState(null);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -15,8 +15,8 @@ export function AdminPage() {
       ? "Use your Supabase admin credentials."
       : "Add VITE_SUPABASE_URL and VITE_SUPABASE_ANON_KEY to enable admin sign-in.",
   );
-  const [saveMessage, setSaveMessage] = useState("Update today's stop, then tap save.");
-  const [saveState, setSaveState] = useState("idle");
+  const [saveMessage] = useState("Daily update tools are currently hidden. The public site now uses mostly static, long-lasting information.");
+  const [saveState] = useState("idle");
 
   useEffect(() => {
     if (!hasSupabaseEnv || !supabase) {
@@ -62,26 +62,6 @@ export function AdminPage() {
     setAuthMessage("Signed in.");
   };
 
-  const handleSave = async (nextContent = siteContent) => {
-    const result = await saveContent(nextContent);
-
-    if (result.ok && result.mode === "supabase") {
-      setSaveState("success");
-      setSaveMessage("Saved. Customers are now seeing today's latest business status.");
-      return result;
-    }
-
-    if (result.ok) {
-      setSaveState("success");
-      setSaveMessage("Saved on this device. Add Supabase later if you want remote updates too.");
-      return result;
-    }
-
-    setSaveState("error");
-    setSaveMessage("Save failed. Please check your Supabase table setup.");
-    return result;
-  };
-
   const handleSignOut = async () => {
     if (supabase) {
       await supabase.auth.signOut();
@@ -95,10 +75,6 @@ export function AdminPage() {
       <div className="section-shell">
         {session ? (
           <AdminDashboard
-            siteContent={siteContent}
-            setSiteContent={setSiteContent}
-            onSave={handleSave}
-            saving={saving}
             saveMessage={saveMessage}
             saveState={saveState}
             dataSource={source}

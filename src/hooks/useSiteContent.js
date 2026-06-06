@@ -204,6 +204,18 @@ function mergeSiteContent(payload) {
   return {
     ...defaultSiteContent,
     ...payload,
+    whereYouCanFindUs: {
+      ...defaultSiteContent.whereYouCanFindUs,
+      ...(payload?.whereYouCanFindUs ?? {}),
+      areas: payload?.whereYouCanFindUs?.areas ?? defaultSiteContent.whereYouCanFindUs.areas,
+      eventTypes: payload?.whereYouCanFindUs?.eventTypes ?? defaultSiteContent.whereYouCanFindUs.eventTypes,
+    },
+    typicalSchedule: {
+      ...defaultSiteContent.typicalSchedule,
+      ...(payload?.typicalSchedule ?? {}),
+      items: payload?.typicalSchedule?.items ?? defaultSiteContent.typicalSchedule.items,
+    },
+    bookingTypes: payload?.bookingTypes ?? defaultSiteContent.bookingTypes,
     todayLocation: normalizeTodayLocation(payload?.todayLocation),
     hero: {
       ...defaultSiteContent.hero,
@@ -277,20 +289,8 @@ export function useSiteContent() {
       };
     }
 
-    const refreshInterval = window.setInterval(() => {
-      loadContent();
-    }, 30000);
-
-    const handleFocus = () => {
-      loadContent();
-    };
-
-    window.addEventListener("focus", handleFocus);
-
     return () => {
       ignore = true;
-      window.clearInterval(refreshInterval);
-      window.removeEventListener("focus", handleFocus);
     };
   }, []);
 

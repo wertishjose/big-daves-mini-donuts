@@ -37,7 +37,7 @@ export function PhotoGallerySection() {
 
   return (
     <>
-      <section className="px-4 py-12 sm:px-6 lg:px-8 lg:py-16">
+      <section id="gallery" className="px-4 py-12 sm:px-6 lg:px-8 lg:py-16">
         <div className="section-shell">
           <SectionHeading
             eyebrow="Photo Gallery"

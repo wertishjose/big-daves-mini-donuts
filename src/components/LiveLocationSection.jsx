@@ -1,7 +1,7 @@
-import { Clock3, MapPin, Navigation, PhoneCall, Store } from "lucide-react";
+import { MapPin, PhoneCall, TentTree, Ticket } from "lucide-react";
 import { SectionHeading } from "./SectionHeading";
 
-export function LiveLocationSection({ location }) {
+export function LiveLocationSection({ content, phone = "(320) 555-1234" }) {
   return (
     <section id="find-us" className="px-4 py-12 sm:px-6 lg:px-8 lg:py-16">
       <div className="section-shell">
@@ -9,89 +9,60 @@ export function LiveLocationSection({ location }) {
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(255,217,111,0.24),transparent_30%)]" />
           <div className="absolute right-0 top-0 h-40 w-40 rounded-full bg-white/10 blur-3xl" />
           <div className="relative">
-            <SectionHeading
-              eyebrow="Find Big Dave Today 🍩"
-              title="The fastest way to figure out where the trailer is right now."
-              tone="light"
-            />
+            <SectionHeading eyebrow="Where You Can Find Us" title={content.title} body={content.body} tone="light" />
+
             <div className="mt-8 grid gap-5 lg:grid-cols-[0.94fr_1.06fr]">
               <div className="glass-card rounded-[1.9rem] p-5 text-donut sm:p-6">
-                <div className="flex flex-wrap items-start justify-between gap-4">
-                  <div>
-                    <p className="text-sm font-black uppercase tracking-[0.24em] text-carnival-red">Current Location</p>
-                    <h3 className="mt-3 font-display text-4xl leading-none text-donut-deep">{location.venue}</h3>
-                  </div>
-                  <div
-                    className={`rounded-full px-4 py-2 text-sm font-black uppercase tracking-[0.16em] ${
-                      location.isOpen ? "bg-[#dff7ea] text-leaf" : "bg-[#fde2df] text-carnival-red-deep"
-                    }`}
-                  >
-                    {location.isOpen ? "Open Now" : "Closed"}
-                  </div>
-                </div>
-
-                <div className="mt-6 space-y-4">
-                  <div className="rounded-[1.5rem] bg-cream p-4">
-                    <div className="flex gap-3">
-                      <MapPin className="mt-1 h-5 w-5 text-carnival-red" />
-                      <div>
-                        <p className="text-sm font-extrabold uppercase tracking-[0.18em] text-carnival-red/80">Address</p>
-                        <p className="mt-1 text-base font-semibold leading-7 text-donut">{location.address}</p>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="grid gap-4 sm:grid-cols-2">
-                    <div className="rounded-[1.5rem] bg-cream p-4">
+                <p className="text-sm font-black uppercase tracking-[0.24em] text-carnival-red">Areas We Commonly Serve</p>
+                <div className="mt-5 space-y-4">
+                  {content.areas.map((area) => (
+                    <div key={area} className="rounded-[1.5rem] bg-cream p-4">
                       <div className="flex gap-3">
-                        <Clock3 className="mt-1 h-5 w-5 text-carnival-red" />
-                        <div>
-                          <p className="text-sm font-extrabold uppercase tracking-[0.18em] text-carnival-red/80">Operating Hours</p>
-                          <p className="mt-1 text-base font-semibold text-donut">{location.hours}</p>
-                        </div>
+                        <MapPin className="mt-1 h-5 w-5 text-carnival-red" />
+                        <p className="text-base font-semibold leading-7 text-donut">{area}</p>
                       </div>
                     </div>
-
-                    <div className="rounded-[1.5rem] bg-cream p-4">
-                      <div className="flex gap-3">
-                        <Store className="mt-1 h-5 w-5 text-carnival-red" />
-                        <div>
-                          <p className="text-sm font-extrabold uppercase tracking-[0.18em] text-carnival-red/80">Today's Special</p>
-                          <p className="mt-1 text-base font-semibold text-donut">{location.featuredSpecial}</p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+                  ))}
                 </div>
 
-                <div className="mt-6 grid gap-3 sm:grid-cols-2">
-                  <a
-                    href={location.directionsUrl}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="inline-flex items-center justify-center gap-2 rounded-full bg-carnival-red px-5 py-4 text-base font-extrabold text-white transition duration-300 hover:-translate-y-1 hover:bg-carnival-red-deep hover:text-white focus-visible:text-white"
-                  >
-                    <span className="text-white">Get Directions</span>
-                    <Navigation className="h-5 w-5 text-white" />
-                  </a>
-                  <a
-                    href={`tel:${location.phone?.replaceAll(/[^0-9+]/g, "") ?? "+13205551234"}`}
-                    className="inline-flex items-center justify-center gap-2 rounded-full border border-donut/10 bg-white px-5 py-4 text-base font-extrabold text-donut transition duration-300 hover:-translate-y-1"
-                  >
-                    Call Trailer
-                    <PhoneCall className="h-5 w-5 text-carnival-red" />
-                  </a>
-                </div>
+                <a
+                  href={`tel:${phone.replaceAll(/[^0-9+]/g, "")}`}
+                  className="mt-6 inline-flex items-center justify-center gap-2 rounded-full bg-carnival-red px-5 py-4 text-base font-extrabold text-white transition duration-300 hover:-translate-y-1 hover:bg-carnival-red-deep"
+                >
+                  Call for Booking Info
+                  <PhoneCall className="h-5 w-5" />
+                </a>
               </div>
 
-              <div className="overflow-hidden rounded-[1.9rem] border border-white/22 bg-white shadow-2xl shadow-black/10">
-                <iframe
-                  title="Big Dave location map"
-                  src={location.mapEmbedUrl}
-                  className="h-[360px] w-full border-0 sm:h-[440px]"
-                  loading="lazy"
-                  referrerPolicy="no-referrer-when-downgrade"
-                />
+              <div className="rounded-[1.9rem] border border-white/22 bg-white/94 p-5 text-donut shadow-2xl shadow-black/10 sm:p-6">
+                <p className="text-sm font-black uppercase tracking-[0.24em] text-carnival-red">Typical Stops</p>
+                <div className="mt-5 grid gap-4 sm:grid-cols-2">
+                  {content.eventTypes.map((type) => (
+                    <div key={type} className="rounded-[1.5rem] bg-[#fff7ea] p-4">
+                      <div className="flex items-start gap-3">
+                        <TentTree className="mt-1 h-5 w-5 text-carnival-red" />
+                        <div>
+                          <p className="text-base font-semibold text-donut">{type}</p>
+                          <p className="mt-1 text-sm leading-6 text-donut/68">
+                            Availability varies by season, event calendar, and private bookings.
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+
+                <div className="mt-5 rounded-[1.5rem] bg-[#fff0d6] p-4">
+                  <div className="flex items-start gap-3">
+                    <Ticket className="mt-1 h-5 w-5 text-carnival-red" />
+                    <div>
+                      <p className="text-sm font-extrabold uppercase tracking-[0.18em] text-carnival-red/80">Good To Know</p>
+                      <p className="mt-2 text-base font-semibold leading-7 text-donut">
+                        This site is meant to stay useful year-round, so it highlights the places and event types Big Dave typically serves instead of relying on daily updates.
+                      </p>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>

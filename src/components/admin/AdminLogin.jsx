@@ -17,7 +17,7 @@ export function AdminLogin({
       </div>
       <h1 className="mt-4 font-display text-4xl leading-none text-donut-deep">Admin Dashboard</h1>
       <p className="mt-3 text-base leading-7 text-donut/75">
-        Sign in with your Supabase admin account to update today's location, specials, events, and the featured image.
+        Sign in with your Supabase admin account to access the site admin area.
       </p>
       <form className="mt-6 space-y-4" onSubmit={onSubmit}>
         <div>
