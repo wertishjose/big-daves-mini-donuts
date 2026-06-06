@@ -1,0 +1,18 @@
+export const galleryPhotos = [
+  { id: "gallery-1", src: "/images/gallery/083290F7-97B5-4BB5-A005-3AD78FEF45EC.png", alt: "Big Dave's Mini Donuts gallery photo 1" },
+  { id: "gallery-2", src: "/images/gallery/125DF153-C221-44A8-8961-19032883DBDC.png", alt: "Big Dave's Mini Donuts gallery photo 2" },
+  { id: "gallery-3", src: "/images/gallery/661908500_122259026036059769_238648391896525221_n.jpg", alt: "Big Dave's Mini Donuts gallery photo 3" },
+  { id: "gallery-4", src: "/images/gallery/663107727_122259026348059769_347286374704656782_n.jpg", alt: "Big Dave's Mini Donuts gallery photo 4" },
+  { id: "gallery-5", src: "/images/gallery/667376632_122259342314059769_4844011156934661762_n.jpg", alt: "Big Dave's Mini Donuts gallery photo 5" },
+  { id: "gallery-6", src: "/images/gallery/696765913_122263167566059769_5243532634088996136_n.jpg", alt: "Big Dave's Mini Donuts gallery photo 6" },
+  { id: "gallery-7", src: "/images/gallery/696792504_122263002350059769_6589352645923373101_n.jpg", alt: "Big Dave's Mini Donuts gallery photo 7" },
+  { id: "gallery-8", src: "/images/gallery/696969433_122263167242059769_8722016294274853602_n.jpg", alt: "Big Dave's Mini Donuts gallery photo 8" },
+  { id: "gallery-9", src: "/images/gallery/697262911_122263167326059769_8878770367604943364_n.jpg", alt: "Big Dave's Mini Donuts gallery photo 9" },
+  { id: "gallery-10", src: "/images/gallery/7C055E90-24AF-400B-B8D6-CF2F3E9EF4EC.png", alt: "Big Dave's Mini Donuts gallery photo 10" },
+  { id: "gallery-11", src: "/images/gallery/F8FCC8C8-A077-4680-A61A-A3A6C076DA02.png", alt: "Big Dave's Mini Donuts gallery photo 11" },
+  { id: "gallery-12", src: "/images/gallery/IMG_3403.jpeg", alt: "Big Dave's Mini Donuts gallery photo 12" },
+  { id: "gallery-13", src: "/images/gallery/IMG_6115.jpeg", alt: "Big Dave's Mini Donuts gallery photo 13" },
+  { id: "gallery-14", src: "/images/gallery/Photoroom_20251214_190305.jpeg", alt: "Big Dave's Mini Donuts gallery photo 14" },
+  { id: "gallery-15", src: "/images/gallery/Photoroom_20260322_183957.jpeg", alt: "Big Dave's Mini Donuts gallery photo 15" },
+  { id: "gallery-16", src: "/images/gallery/Photoroom_20260424_184950.jpeg", alt: "Big Dave's Mini Donuts gallery photo 16" },
+];

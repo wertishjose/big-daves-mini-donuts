@@ -3,6 +3,7 @@ import { FeaturedFavoritesSection } from "../components/FeaturedFavoritesSection
 import { Footer } from "../components/Footer";
 import { HeroSection } from "../components/HeroSection";
 import { LiveLocationSection } from "../components/LiveLocationSection";
+import { PhotoGallerySection } from "../components/PhotoGallerySection";
 import { StickyMobileBar } from "../components/StickyMobileBar";
 import { TestimonialsSection } from "../components/TestimonialsSection";
 import { UpcomingEventsSection } from "../components/UpcomingEventsSection";
@@ -14,6 +15,7 @@ export function HomePage() {
   return (
     <main className="pb-10">
       <HeroSection hero={siteContent.hero} todayLocation={siteContent.todayLocation} />
+      <PhotoGallerySection />
       <LiveLocationSection location={siteContent.todayLocation} />
       <FeaturedFavoritesSection items={siteContent.featuredItems} />
       <TestimonialsSection testimonials={siteContent.testimonials} />
